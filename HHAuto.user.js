@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         HaremHeroes Automatic++
 // @namespace    https://github.com/Roukys/HHauto
-// @version      5.1-beta.10
+// @version      5.1-beta.11
 // @description  Open the menu in HaremHeroes(topright) to toggle AutoControlls. Supports AutoSalary, AutoContest, AutoMission, AutoQuest, AutoTrollBattle, AutoArenaBattle and AutoPachinko(Free), AutoLeagues, AutoChampions and AutoStatUpgrades. Messages are printed in local console.
 // @author       JD and Dorten(a bit) and roukys
 // @match        http*://nutaku.haremheroes.com/*
@@ -1365,7 +1365,7 @@ var doSeason = function () {
         {
             console.log("Switching to Season-arena screen.");
             gotoPage("season-arena");
-            return;
+            return true;
         }
 
 
@@ -1381,7 +1381,7 @@ var doSeason = function () {
         {
             location.href = document.getElementsByClassName("opponent_perform_button_container")[chosenID].children[0].getAttribute('href');
             console.log("Going to crush : "+$("div.season_arena_opponent_container .hero_details div:not([class]):not([carac])")[chosenID].innerText);
-            return true;
+            return false;
         }
     }
     //     else if (page==="battle")
@@ -1393,7 +1393,7 @@ var doSeason = function () {
         // Switch to the correct screen
         console.log("Switching to Season screen.");
         gotoPage("season");
-        return;
+        return true;
     }
 };
 
@@ -2931,8 +2931,7 @@ var autoLoop = function () {
         if(Storage().autoSeason === "true" && busy === false && getHero().infos.energy_kiss)
         {
             console.log("Time to fight in Season.");
-            doSeason();
-            busy = true;
+            busy = doSeason();
 
         }
 
