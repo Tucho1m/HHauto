@@ -1367,6 +1367,10 @@ var doSeason = function () {
             gotoPage("season-arena");
             return true;
         }
+        else 
+        {
+            return false;
+        }
 
 
     }
